@@ -6,18 +6,18 @@ import {
 
 figma.showUI(__html__);
 
-async function fetchNotionData(pageUrl) {
-  const notionKey = "your_notion_api_key";
-  const notionPageId = extractPageIdFromUrl(pageUrl); // 페이지 URL에서 ID 추출하는 함수
-  const response = await fetch(`https://api.notion.com/v1/pages/${notionPageId}`, {
-    headers: {
-      "Authorization": `Bearer ${notionKey}`,
-      "Notion-Version": "2022-06-28"
-    }
-  });
-  const data = await response.json();
-  return data;
-}
+//async function fetchNotionData(pageUrl) {
+  //const notionKey = "your_notion_api_key";
+  //const notionPageId = extractPageIdFromUrl(pageUrl); // 페이지 URL에서 ID 추출하는 함수
+  //const response = await fetch(`https://api.notion.com/v1/pages/${notionPageId}`, {
+  //  headers: {
+  //    "Authorization": `Bearer ${notionKey}`,
+  //    "Notion-Version": "2022-06-28"
+  //  }
+  //});
+  //const data = await response.json();
+  //return data;
+//}
 
 async function loadFonts() {
   await figma.loadFontAsync({
