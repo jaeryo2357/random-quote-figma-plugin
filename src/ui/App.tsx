@@ -35,20 +35,23 @@ const Text = styled.p`
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
-  const getRandomQuote = useRandomQuotes();
+  const [url, setUrl] = useState('');
 
-  const generateRandomQuote = async () => {
-    setIsLoading(true);
-    const randomQuote = await getRandomQuote();
-    requestGenerateRandomQuoteToPlugin(randomQuote);
-    setIsLoading(false);
+  const handleSubmit = () => {
+    //parent.postMessage({ pluginMessage: { type: 'generate-widgets', url } }, '*');
   };
 
   return (
     <Container>
-      <Text>Select Text Node and Click</Text>
-      <Button onClick={generateRandomQuote}>
-        {isLoading ? 'Loading...' : 'Random Quote'}
+      <Text>FigNotion</Text>
+      <input
+        type="text"
+        value={url}
+        onChange={(e) => setUrl(e.target.value)}
+        placeholder="노션 URL을 입력해주세요"
+      />
+      <Button onClick={handleSubmit}>
+        {isLoading ? 'Loading...' : '불러오기'}
       </Button>
     </Container>
   );
