@@ -1,6 +1,14 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src",
+    "\\src\\plugin",
+    "\\src\\shared",
+    "\\src\\ui",
+    "\\src\\ui\\api",
+    "\\src\\ui\\hooks",
+    "\\src\\ui\\lib",
+    "\\webpack-configs"
   ],
   "PreviewInSolutionExplorer": false
 }

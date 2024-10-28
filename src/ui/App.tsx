@@ -33,6 +33,22 @@ const Text = styled.p`
   font-size: 20px;
 `;
 
+const Input = styled.input`
+  width: 100%;
+  padding: 10px 15px;
+  margin: 10px 0;
+  font-size: 20px;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.15s;
+
+  &:focus {
+    border-color: #555;
+  }
+`;
+
 function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [url, setUrl] = useState('');
@@ -44,14 +60,14 @@ function App() {
   return (
     <Container>
       <Text>FigNotion</Text>
-      <input
+      <Input
         type="text"
         value={url}
         onChange={(e) => setUrl(e.target.value)}
-        placeholder="³ë¼Ç URLÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä"
+        placeholder='ë…¸ì…˜ URLì„ ìž…ë ¥í•´ì£¼ì„¸ìš”'
       />
       <Button onClick={handleSubmit}>
-        {isLoading ? 'Loading...' : 'ºÒ·¯¿À±â'}
+        {isLoading ? 'Loading...' : 'ë¶ˆëŸ¬ì˜¤ê¸°'}
       </Button>
     </Container>
   );
