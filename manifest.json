@@ -1,8 +1,11 @@
 {
-  "name": "figma-notion",
-  "id": "00000000",
+  "name": "WidgetTemplate",
+  "id": "10074075004744806088",
   "api": "1.0.0",
-  "main": "dist/plugin.js",
   "editorType": ["figma", "figjam"],
-  "ui": "dist/ui.html"
+  "permissions": [],
+  "containsWidget": true,
+  "main": "dist/code.js",
+  "ui": "dist/index.html",
+  "widgetApi": "1.0.0"
 }

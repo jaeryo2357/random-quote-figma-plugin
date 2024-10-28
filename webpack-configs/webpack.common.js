@@ -47,7 +47,7 @@ module.exports = {
       filename: 'ui.html',
       inlineSource: '.(js)$',
       chunks: ['ui'],
-      meta: { charset: 'UTF-8' },  // 인코딩 명시
+      meta: { charset: 'UTF-8' },
     }),
     new HtmlWebpackInlineSourcePlugin(HtmlWebpackPlugin),
   ],

@@ -1,28 +1,61 @@
-# Figma Plugin - Random Quote
+# create-widget-app
 
- 피그마 플러그인 튜토리얼을 주제로 쓴 글을 위한 예시 플러그인입니다. 텍스트 노드를 선택한 후 `Random Quote` 버튼을 클릭하면 선택한 텍스트 노드에 임의의 인용문이 삽입됩니다.
+Template app that creates a widget & react iframe.
 
-- Blog: [우아한형제들 기술블로그: React 개발자를 위한 피그마 플러그인 개발(feat. 온보딩)](https://techblog.woowahan.com/8339/)
+Code organization:
 
-## Install and Start
+| dir / path               | description                          |
+| ------------------------ | ------------------------------------ |
+| ui-src/                  | This is where the iframe code lives  |
+| ui-src/index.html        | Main entry point for the iframe code |
+| ui-src/tsconfig.json     | tsconfig for the iframe code         |
+| widget-src/              | This is where the widget code lives  |
+| widget-src/code.tsx      | Main entry point for the widget code |
+| widget-src/tsconfig.json | tsconfig for the widget code         |
+| dist/                    | Built output goes here               |
 
+- The widget code just uses esbuild to bundle widget-src/code.tsx into one file.
+- The iframe code uses a tool called [vite](https://vitejs.dev/) to bundle everything into a single html file
+
+## Getting started
+
+### One-time setup
+1. Make a copy of this folder
+2. Update manifest.json, package.json and package-lock.json where it says `WidgetTemplate`
+3. Install the required dependencies `npm ci`
+
+
+### Importing your widget
+1. "Import widget from manifest"
+2. Build code `npm run build`
+3. Choose your manifest
+
+
+## Development
+
+The quickest way to build your widget during development is by running:
+
+```sh
+npm run dev
 ```
-$ git clone https://github.com/hseoy/random-quote-figma-plugin
-$ yarn install
-$ yarn watch
-```
 
-## 실행방법
+This command starts the follow in watch mode:
+1. typechecking for widget-src & ui-src
+2. bundling for widget-src & ui-src
+3. starts a vite dev server that servesr ui-src/index.html at localhost:3000
 
-1. 피그마 데스크탑을 실행합니다.
-2. 오른쪽 상단의 프로필 드랍다운을 클릭한 후 목록에서 `Plugins`를 클릭합니다.
-3. `In development` 섹션에서 Plus(+) 아이콘을 클릭합니다.
-4. `Import from manifest`를 선택합니다.
-5. clone 받은 경로에서 manifest.json을 선택합니다.
-6. 이제 플러그인을 피그마 파일에서 사용할 수 있습니다. 아무 피그마 파일이나 선택한 후 `Plugins > Development > random-quote`를 클릭하면 아래와 같이 실행되는 동작을 확인할 수 있습니다.
+## Other scripts
 
-![run](./images/example-plugin-run.gif)
+| script                   | description                                                             |
+| ------------------------ | ----------------------------------------------------------------------- |
+| npm run build            | one-off full build of both the iframe and widget                        |
+| npm run build:production | one-off full production (minified) build of both the iframe and widget  |
+| npm run build:main       | one-off build of the widget code                                        |
+| npm run build:ui         | one-off build of the iframe code                                        |
+| npm run tsc              | typecheck both the iframe and widget                                    |
 
-## 참고
+# Issues / Bugs
 
-- [hseoy/figma-plugin-react-boilerplate](https://github.com/hseoy/figma-plugin-react-boilerplate)를 기반으로 개발되었습니다.
+For more information about widgets, please visit the widget documentation at https://www.figma.com/widget-docs.
+
+If you find anything bugs or have any questions, please reach out via https://www.figma.com/widget-docs/get-help/.
