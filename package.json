@@ -16,7 +16,7 @@
     "build:watch": "concurrently -n widget,iframe \"npm run build:main -- --watch\" \"npm run build:ui -- --watch\"",
     "dev": "concurrently -n tsc,build,vite 'npm:tsc:watch' 'npm:build:watch' 'npx vite'"
   },
-  "author": "Figma",
+  "author": "Jaeryo",
   "license": "MIT License",
   "dependencies": {
     "react": "^17.0.0",
