@@ -1,7 +1,18 @@
 const { widget } = figma
 const { AutoLayout, Text } = widget
+import { fetchNotionData } from "network/code";
 
 function Widget() {
+  const [notionApiKey, setNotionApiKey] = widget.useSyncedState("apiKey", "");
+  const [blockUrl, setBlockUrl] = widget.useSyncedState("blockUrl", "");
+  const [notionData, setNotionData] = widget.useSyncedState("data", null)
+
+  widget.useEffect(() => {
+    fetchNotionData().then((data) => {
+        
+    });
+  }, []);
+
   return (
     <AutoLayout
       direction="horizontal"
