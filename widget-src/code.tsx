@@ -1,13 +1,23 @@
 const { widget } = figma
 const { AutoLayout, Text, useEffect, waitForTask  } = widget
-import { fetchNotionData, BlockResponse } from "network/code";
+import { fetchNotionData, BlockResponse } from "./network/code";
 
 type NullableBlockResponse = BlockResponse | null;
+
+const defaultBlockResponse: BlockResponse = {
+  last_edited_time: "",
+  type: "heading_1",
+  heading_1: {
+    rich_text: {
+      plain_text: "테스트"
+    }
+  }
+};
 
 function Widget() {
   const [notionApiKey, setNotionApiKey] = widget.useSyncedState("apiKey", "");
   const [blockUrl, setBlockUrl] = widget.useSyncedState("blockUrl", "");
-  const [notionData, setNotionData] = widget.useSyncedState<NullableBlockResponse>("data", null)
+  const [notionData, setNotionData] = widget.useSyncedState<NullableBlockResponse>("data", defaultBlockResponse)
 
   useEffect(() => {
 
