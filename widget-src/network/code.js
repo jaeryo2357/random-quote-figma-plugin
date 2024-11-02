@@ -1,6 +1,5 @@
 async function fetchNotionData(apiKey, blockUrl) {
     const notionPageId = getBlockIdAndNotify(blockUrl); // URL에서 ID 추출하는 함수
-    if (notionPageId == null) return
     const response = await fetch(`https://api.notion.com/v1/blocks/${notionPageId}`, {
       headers: {
         "Authorization": `Bearer ${apiKey}`,
