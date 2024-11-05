@@ -1,12 +1,14 @@
-async function fetchNotionData(apiKey, blockUrl) {
+export async function fetchNotionData(apiKey, blockUrl) {
     const notionPageId = getBlockIdAndNotify(blockUrl); // URL에서 ID 추출하는 함수
     const response = await fetch(`https://api.notion.com/v1/blocks/${notionPageId}`, {
       headers: {
         "Authorization": `Bearer ${apiKey}`,
-        "Notion-Version": "2022-06-28"
+        "Notion-Version": "2022-06-28",
+        'Access-Control-Allow-Origin': '*'
       }
     });
     const data = await response.json();
+    console.log(data)
     return data;
   }
 
