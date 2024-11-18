@@ -1,5 +1,5 @@
 const { widget } = figma
-const { AutoLayout, Text, useEffect, waitForTask  } = widget
+const { AutoLayout, Text, useEffect, waitForTask, usePropertyMenu   } = widget
 import { fetchNotionData, BlockResponse } from "./network/code";
 
 type NullableBlockResponse = BlockResponse | null;
@@ -19,21 +19,40 @@ function Widget() {
   const [blockUrl, setBlockUrl] = widget.useSyncedState("blockUrl", "");
   const [notionData, setNotionData] = widget.useSyncedState<NullableBlockResponse>("data", defaultBlockResponse)
 
-  useEffect(() => {
 
-    waitForTask(new Promise(resolve => {
-      figma.ui.onmessage = (msg) => {
-        if (msg == "FetchData") {
-          fetchNotionData(notionApiKey, blockUrl).then((data) => {
-            setNotionData(data)
-          }).catch((error) => {
-            console.error("Error fetching Notion data:", error);
-            figma.notify("Notion 데이터를 불러오는 중 오류가 발생했습니다.");
-          });
-        }
+  // useProperyMenu
+  usePropertyMenu(
+    [
+      {
+        tooltip: 'URL 입력', // 버튼에 노출되는 이름
+        propertyName: 'InputURL',
+        itemType: 'action',
+      },
+      {
+        tooltip: '동기화',
+        propertyName: 'Sync',
+        itemType: 'action',
+      },
+    ],
+    ({propertyName, propertyValue}) => {
+      if (propertyName === "InputURL") {
+        return new Promise(() => {
+          figma.showUI(
+            __html__,
+            { width: 500, height: 450 }
+          )
+          figma.ui.on('message', (msg) => {
+            if (msg.type == 'Submit') {
+              figma.notify(msg.url)
+              figma.closePlugin()
+            }
+          })
+      });
+      } else if (propertyName === "Sync") {
+        figma.notify(`동기화 하기`)
       }
-    }))
-  });
+    },
+  )
 
   return (
     <AutoLayout
@@ -45,19 +64,6 @@ function Widget() {
       fill="#FFFFFF"
       cornerRadius={8}
       spacing={12}
-      onClick={async () => {
-        await new Promise((resolve) => {
-          figma.showUI(__html__)
-          figma.ui.on('message', (msg) => {
-            if (msg === 'hello') {
-              figma.notify(`Hello Widgets`)
-            }
-            if (msg === 'close') {
-              figma.closePlugin()
-            }
-          })
-        })
-      }}
     >
       {notionData ? (
         <>
